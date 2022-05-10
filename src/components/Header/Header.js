@@ -12,8 +12,8 @@ const Header = () => {
   }
 
   return (
-    <div className='fixed top-0 w-full'>
-      <div className="navbar bg-base-100 container mx-auto">
+    <div className='fixed top-0 w-full z-30 bg-[rgba(255,255,255,0.4)]'>
+      <div className="navbar container mx-auto">
         <div className="flex-none">
           <button onClick={toggleDrawer} className="btn btn-square btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current text-[#008000]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -62,7 +62,7 @@ const Header = () => {
             </ul>
           </div>
           <div className="md:ml-5">
-            <Link to="/login" className="btn btn-accent text-base-100 ">Log in</Link>
+            <Link to="/login" className="btn btn-accent text-base-100 font-bold bg-gradient-to-r from-primary to-accent">Log in</Link>
           </div>
         </div>
       </div>
