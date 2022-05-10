@@ -12,7 +12,7 @@ const Header = () => {
   }
 
   return (
-    <div className='fixed top-0 w-full z-30 bg-[rgba(255,255,255,0.4)]'>
+    <div className='fixed top-0 w-full z-30 bg-[rgba(255,255,255,0.53)]'>
       <div className="navbar container mx-auto">
         <div className="flex-none">
           <button onClick={toggleDrawer} className="btn btn-square btn-ghost">

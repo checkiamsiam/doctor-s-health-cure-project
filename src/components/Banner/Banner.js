@@ -20,7 +20,7 @@ const Banner = () => {
         <div>
           <div className="hero bg-transparent md:min-h-screen">
             <div className="hero-content flex-col lg:flex-row lg:gap-40">
-              <img src={Modern} alt='im' className="max-w-sm rounded-lg shadow-2xl " />
+              <img src={Modern} alt='machinePhoto' className="max-w-sm rounded-lg shadow-2xl " />
               <div className='lg:w-1/2'>
                 <h1 className="text-5xl font-bold text-primary cursor-text">Modern Surgical Machines</h1>
                 <p className="py-6 text-2xl text-accent font-mono cursor-text">We have the best quality of surgical machines for secure your surgery and a successful operation.</p>
@@ -33,7 +33,7 @@ const Banner = () => {
         <div>
           <div className="hero bg-transparent md:min-h-screen">
             <div className="hero-content flex-col lg:flex-row lg:gap-40">
-              <img src={baby} alt='s' className="max-w-sm rounded-lg shadow-2xl " />
+              <img src={baby} alt='babyCare' className="max-w-sm rounded-lg shadow-2xl " />
               <div className='lg:w-1/2'>
                 <h1 className="text-5xl font-bold text-primary cursor-text">New Born Support.</h1>
                 <p className="py-6 text-2xl text-accent font-mono cursor-text">Feel Free to give your new born baby for health care with unlimited support and oxygen bed for healthy baby</p>

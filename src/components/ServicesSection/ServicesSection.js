@@ -12,9 +12,7 @@ const ServicesSection = () => {
       <div className='lg:flex gap-5'>
         <ServicesCard icon={Cavity} title="Cavity Filup" body="Before filling cavities, your dentist will numb your teeth, gums and surrounding skin to avoid and lessen discomfort during the procedure."></ServicesCard>
         <ServicesCard icon={flouride} title="Fluoride Treatment" body="Professional treatments containing a high concentration of fluoride that a dentist  will apply to a person's teeth to improve health and reduce the risk of cavities"></ServicesCard>
-        <ServicesCard icon={teeth} title="Teeth Whitening" body="Beautifully whitening your teeth and save your teeth from cavity and your teeth will looks ultra white "></ServicesCard>
-        
-      </div>
+        <ServicesCard icon={teeth} title="Teeth Whitening" body="Beautifully whitening your teeth and save your teeth from cavity and your teeth will looks ultra white "></ServicesCard></div>
     </div>
   );
 };
