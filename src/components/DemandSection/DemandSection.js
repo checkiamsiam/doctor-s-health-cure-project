@@ -12,8 +12,8 @@ const DemandSection = () => {
     <div>
       <h1 className='text-primary md:text-5xl text-3xl text-center '><span className='border-b-2 border-dashed border-accent'>Highest Demand</span></h1>
       <div className="hero min-h-screen bg-transparent">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="h-96 carousel carousel-vertical rounded-box ">
+        <div className="hero-content flex-col lg:flex-row-reverse lg:gap-20">
+          <div className="h-96  carousel carousel-vertical rounded-box ">
             <div className="carousel-item h-full mb-2 rounded">
               <img alt='whiting-img-1' src={img1} width='350px'/>
             </div>

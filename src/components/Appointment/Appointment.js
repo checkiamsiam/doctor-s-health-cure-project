@@ -4,7 +4,7 @@ import bg from '../../assets/images/appointment.png'
 
 const Appointment = () => {
   return (
-    <div className='relative bg-forAppointment lg:bg-transparent rounded mt-32'>
+    <div className='relative bg-forAppointment lg:bg-transparent rounded lg:mt-32 container-full'>
       <img className='xl:h-[28rem]  w-full rounded lg:block hidden' src={bg} alt="" />
       <div className="hero  bg-transparent lg:absolute xl:bottom-0 lg:bottom-20 ">
         <div className="hero-content flex-col lg:flex-row ">
