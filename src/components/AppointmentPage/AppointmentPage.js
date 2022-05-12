@@ -8,7 +8,7 @@ const AppointmentPage = () => {
   return (
     <div className='md:p-0 pt-10 container mx-auto'>
       <AppointmentBanner selectedDate={selectedDate} setSelectedDate={setSelectedDate}></AppointmentBanner>
-      <AvailableAppointmentOnDate selectedDate={selectedDate}></AvailableAppointmentOnDate>
+      <AvailableAppointmentOnDate selectedDate={selectedDate} ></AvailableAppointmentOnDate>
     </div>
   );
 };

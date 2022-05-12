@@ -4,6 +4,7 @@ import AvailableAppointmentCard from './AvailableAppointmentCard';
 
 const AvailableAppointmentOnDate = ({ selectedDate }) => {
   const [services, setServices] = useState([]);
+  const [modalService , setModalService] = useState({})
   useEffect(() => {
     fetch('http://localhost:5000/services')
       .then(res => res.json())
@@ -15,7 +16,7 @@ const AvailableAppointmentOnDate = ({ selectedDate }) => {
         : 'No Date Selected'
       } </span></h1>
       {selectedDate && <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
-        {services.map(service => <AvailableAppointmentCard key={service._id} selectedDate={selectedDate} name={service?.name} slots={service?.slots} />)}
+        {services.map(service => <AvailableAppointmentCard key={service._id} modalService={modalService} setModalService={setModalService}  selectedDate={selectedDate} service={service} />)}
       </div>}
     </div>
   );
