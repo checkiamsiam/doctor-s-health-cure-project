@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import AppointmentPage from './components/AppointmentPage/AppointmentPage';
+import Login from './components/LogIn/Login';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/appointment' element={<AppointmentPage></AppointmentPage>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
       </Routes>
       <Footer></Footer>
       <ScrollToTop component={<FcUpload />} style={{ borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' , backgroundColor:'rgba(255,255,255,0.53)' }} smooth />

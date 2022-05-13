@@ -1,10 +1,10 @@
 import React from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 
-const TestimonialCard = ({img , name , adress , review , linkedin}) => {
+const TestimonialCard = ({ img, name, adress, review, linkedin }) => {
   return (
     <div>
-      <div className="card hover:shadow-sm hover:shadow-accent bg-base-100 h-full shadow-xl text-[#36454F]">
+      <div className="card hover:shadow-sm hover:shadow-accent bg-base-100 h-full shadow-xl text-neutral">
         <div className="card-body">
           <p className='capitalize mb-3 italic'>{review}</p>
           <div className="card-actions flex items-center gap-5">

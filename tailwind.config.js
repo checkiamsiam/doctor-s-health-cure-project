@@ -17,11 +17,16 @@ module.exports = {
           primary: "#008000",
           secondary: "#0000FF",
           accent: "#37cdbe",
-          neutral: "#3d4451",
+          neutral: "#36454F",
           "base-100": "#ffffff",
         },
+        dark: {
+          ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
+    
+          "neutral": "#ffffff",
+        },
       },
-      "dark",
+
     ],
   },
   plugins: [require("daisyui")],

@@ -6,10 +6,7 @@ import 'react-day-picker/dist/style.css';
 
 const AppointmentBanner = ({selectedDate , setSelectedDate}) => {
 
-  let footer = <p className='text-primary text-center'>Please pick a day.</p>;
-  if (selectedDate) {
-    footer = <p >Your Selected date .</p>;
-  }
+
   return (
     <div className='bg-forBanner bg-cover bg-center bg-no-repeat pt-12 mb-8'>
       <div className="hero  flex items-center justify-center">

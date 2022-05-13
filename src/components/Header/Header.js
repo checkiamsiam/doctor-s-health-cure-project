@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { GrClose } from 'react-icons/gr';
@@ -15,31 +15,9 @@ const Header = () => {
     <div className='fixed top-0 w-full z-30 bg-[rgba(255,255,255,0.53)]'>
       <div className="navbar container mx-auto">
         <div className="flex-none">
-          <button onClick={toggleDrawer} className="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current text-[#008000]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          <button onClick={toggleDrawer} className="btn btn-square btn-ghost lg:block hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current text-primary"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
           </button>
-          <Drawer
-
-            zIndex
-            open={isOpen}
-            onClose={toggleDrawer}
-            direction='top'
-            className='bla bla bla'
-          >
-            <div className='relative'>
-
-              <ul className=" py-20 flex flex-wrap justify-center  gap-6  p-4 overflow-y-auto bg-base-100 text-base-content">
-                <li onClick={toggleDrawer}><CustomLink to="/" className="btn btn-ghost text-primary">Home</CustomLink></li>
-                <li onClick={toggleDrawer}><CustomLink to="/appointment" className="btn btn-ghost text-primary">Appointment</CustomLink></li>
-                <li onClick={toggleDrawer}><CustomLink to="/reviews" className="btn btn-ghost text-primary">Reviews</CustomLink></li>
-                <li onClick={toggleDrawer}><CustomLink to="/about" className="btn btn-ghost text-primary">About</CustomLink></li>
-
-                <li onClick={toggleDrawer}><CustomLink to="/contact" className="btn btn-ghost text-primary">Contact Us</CustomLink></li>
-              </ul>
-
-              <button onClick={toggleDrawer} className="btn btn-ghost btn-circle absolute top-2 right-5 text-2xl "><GrClose /></button>
-            </div>
-          </Drawer>
         </div>
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost normal-case text-xl text-primary">Health Cure</Link>
@@ -48,7 +26,7 @@ const Header = () => {
           <div className="dropdown dropdown-end ">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
               <div className="w-9 rounded-full">
-                <img src="https://api.lorem.space/image/face?hash=33791" />
+                <img src="https://api.lorem.space/image/face?hash=33791" alt='' />
               </div>
             </label>
             <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -64,8 +42,37 @@ const Header = () => {
           <div className="md:ml-5">
             <Link to="/login" className="btn btn-accent text-base-100 font-bold bg-gradient-to-r from-primary to-accent">Log in</Link>
           </div>
+
+
+          
+
+          <button onClick={toggleDrawer} className="btn btn-square btn-ghost lg:hidden block ml-1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current text-[#008000]"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
         </div>
       </div>
+      <Drawer
+
+        zIndex
+        open={isOpen}
+        onClose={toggleDrawer}
+        direction='top'
+        className='bla bla bla bg-neutral'
+      >
+        <div className='relative'>
+
+          <ul className=" py-20 flex flex-wrap justify-center  gap-6  p-4 overflow-y-auto bg-base-100 text-base-content">
+            <li onClick={toggleDrawer}><CustomLink to="/" className="btn btn-ghost text-primary">Home</CustomLink></li>
+            <li onClick={toggleDrawer}><CustomLink to="/appointment" className="btn btn-ghost text-primary">Appointment</CustomLink></li>
+            <li onClick={toggleDrawer}><CustomLink to="/reviews" className="btn btn-ghost text-primary">Reviews</CustomLink></li>
+            <li onClick={toggleDrawer}><CustomLink to="/about" className="btn btn-ghost text-primary">About</CustomLink></li>
+
+            <li onClick={toggleDrawer}><CustomLink to="/contact" className="btn btn-ghost text-primary">Contact Us</CustomLink></li>
+          </ul>
+
+          <button onClick={toggleDrawer} className="btn btn-ghost btn-circle absolute top-2 right-5 text-2xl "><GrClose /></button>
+        </div>
+      </Drawer>
     </div>
   );
 };

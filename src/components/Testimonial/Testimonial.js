@@ -9,7 +9,7 @@ const Testimonial = () => {
     <div className='my-10'>
       <div className='py-10 bg-forTestimonial bg-no-repeat bg-right-top bg-contain'>
         <h5 className='uppercase text-primary font-bold font-mono md:text-xl'>Testimonial</h5>
-        <h1 className='md:text-4xl text-2xl font-thin text-[#36454F] '>Patients Review</h1>
+        <h1 className='md:text-4xl text-2xl font-thin text-neutral '>Patients Review</h1>
       </div>
       <div className='grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-5 md:mt-20 mt-10'>
         <TestimonialCard img={ali} name="Mohammad Ali" adress="Sarulia , Demra" review="it's a very care-able hospital it help me to re-white my teeth and now my teeth is much whiter then before" linkedin="https://www.linkedin.com/in/itsproali/"></TestimonialCard>
