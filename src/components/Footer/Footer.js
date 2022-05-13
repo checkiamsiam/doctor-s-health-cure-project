@@ -20,6 +20,7 @@ const Footer = () => {
       </footer>
       <div className='text-center text-xs md:text-lg text-accent'>
         <p>Copyright © 2022 - All right reserved by Health Cure Ltd</p>
+        <p>Developed by <a href='https://github.com/checkiamsiam' target="_blank" className='hover:underline text-pink-400'>Sheikh Shahariar Siam</a></p>
       </div>
     </div>
   );
