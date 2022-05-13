@@ -6,8 +6,8 @@ import siam from '../../assets/images/users-avatar/siam.png'
 
 const Testimonial = () => {
   return (
-    <div className='my-10'>
-      <div className='py-10 bg-forTestimonial bg-no-repeat bg-right-top bg-contain'>
+    <div className='my-10 container mx-auto md:py-20 '>
+      <div className='py-10 px-5 md:px-0 bg-forTestimonial bg-no-repeat bg-right-top bg-contain'>
         <h5 className='uppercase text-primary font-bold font-mono md:text-xl'>Testimonial</h5>
         <h1 className='md:text-4xl text-2xl font-thin text-neutral '>Patients Review</h1>
       </div>

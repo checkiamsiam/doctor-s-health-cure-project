@@ -30,21 +30,21 @@ const Header = () => {
         <div className="flex-none">
           {user ? <div className="dropdown dropdown-end ">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-              {user.photoURL ? <div className="w-9 rounded-full">
+              {user?.photoURL ? <div className="w-9 rounded-full">
                 <img src={user.photoURL} alt='' />
               </div>
                 :
-                <div class="avatar placeholder">
-                  <div class="bg-primary-focus text-neutral-content rounded-full w-9">
-                    <span class="text-3xl">{firstLetter}</span>
+                <div className="avatar placeholder">
+                  <div className="bg-primary-focus text-neutral-content rounded-full w-9">
+                    <span className="text-3xl">{firstLetter}</span>
                   </div>
                 </div>}
             </label>
             <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              <li className='text-center text-primary '>{user.displayName}</li>
-              <li className='text-center mb-2 text-primary'>{user.email}</li>
+              <li className='text-center text-primary '>{user?.displayName}</li>
+              <li className='text-center mb-2 text-primary'>{user?.email}</li>
               <li className='text-accent'><Link to="user_settings">Settings</Link></li>
-              <li onClick={()=> signOut(auth)} className='text-accent'><button>Logout</button></li>
+              <li onClick={() => signOut(auth)} className='text-accent'><button>Logout</button></li>
             </ul>
           </div>
             :

@@ -1,5 +1,7 @@
 import { format } from 'date-fns';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const AvailableAppointmentCard = ({ service, selectedDate, modalService, setModalService }) => {
   const { name, slots } = service;
@@ -20,6 +22,7 @@ const AvailableAppointmentCard = ({ service, selectedDate, modalService, setModa
 
 
 const AppointmentModal = ({ modalService, selectedDate }) => {
+  const [user] = useAuthState(auth);
   const { name, slots } = modalService;
 
   return (
@@ -34,9 +37,9 @@ const AppointmentModal = ({ modalService, selectedDate }) => {
             <select className="select input w-full mb-3 bg-[#E6E6E6]">
               {slots?.length > 0 && slots.map(slot => <option key={slot}>{slot}</option>)}
             </select>
-            <input type="text" placeholder="Name" className="input  w-full mb-3 bg-[#E6E6E6]" />
+            <input type="text" value={user?.displayName} placeholder="Name" className="input  w-full mb-3 bg-[#E6E6E6]"  readOnly/>
+            <input type="text" value={user?.email} placeholder="Email Adress" className="input w-full mb-3 bg-[#E6E6E6]" readOnly/>
             <input type="text" placeholder="Phone Number" className="input  w-full mb-3 bg-[#E6E6E6]" />
-            <input type="text" placeholder="Email Adress" className="input w-full mb-3 bg-[#E6E6E6]" />
             <input type="submit" value="BOOk" className='btn btn-accent text-base-100 font-bold bg-gradient-to-r from-primary to-accent' />
           </form>
 
