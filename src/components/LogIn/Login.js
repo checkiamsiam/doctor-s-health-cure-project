@@ -31,18 +31,8 @@ const Login = () => {
     return <Loading></Loading>
   }
 
-  // if (user3) {
-  //   if (user3.emailVerified) {
-  //     navigate(from)
-
-
-  //   } else {
-  //     signOut(auth)
-  //     toast('Your Email is not verify. Verify to Login')
-
-  //   }
-  // }
   
+
   if (user1 || user2 || user3) {
     navigate(from)
   }
