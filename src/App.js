@@ -4,6 +4,8 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { publicRoutes, GoTOP, authRoutes } from './components/AppJsMinifier/AppJsMinifier';
 import RequireAuth from './components/RequireAuth/RequireAuth';
+import { Toaster } from 'react-hot-toast';
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
       </Routes>
       <Footer></Footer>
       <GoTOP />
+      <Toaster />
     </div>
   );
 }

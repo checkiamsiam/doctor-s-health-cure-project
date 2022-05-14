@@ -67,11 +67,33 @@ const Header = () => {
         open={isOpen}
         onClose={toggleDrawer}
         direction='top'
-        className='bla bla bla bg-neutral'
+        className='bla bla bla bg-neutral hidden lg:block'
       >
         <div className='relative'>
 
           <ul className=" py-20 flex flex-wrap justify-center  gap-6  p-4 overflow-y-auto bg-base-100 text-base-content">
+            <li onClick={toggleDrawer}><NavLink to="/" className="btn btn-ghost text-primary">Home</NavLink></li>
+            <li onClick={toggleDrawer}><NavLink to="/appointment" className="btn btn-ghost text-primary">Appointment</NavLink></li>
+            <li onClick={toggleDrawer}><NavLink to="/reviews" className="btn btn-ghost text-primary">Reviews</NavLink></li>
+            <li onClick={toggleDrawer}><NavLink to="/about" className="btn btn-ghost text-primary">About</NavLink></li>
+
+            <li onClick={toggleDrawer}><NavLink to="/contact" className="btn btn-ghost text-primary">Contact Us</NavLink></li>
+          </ul>
+
+          <button onClick={toggleDrawer} className="btn btn-ghost btn-circle absolute top-2 right-5 text-2xl "><GrClose /></button>
+        </div>
+      </Drawer>
+      <Drawer
+
+        zIndex
+        open={isOpen}
+        onClose={toggleDrawer}
+        direction='right'
+        className='bla bla bla bg-neutral  lg:hidden'
+      >
+        <div className='relative'>
+
+          <ul className=" py-20  text-center  gap-3  p-4 overflow-y-auto bg-base-100 text-base-content">
             <li onClick={toggleDrawer}><NavLink to="/" className="btn btn-ghost text-primary">Home</NavLink></li>
             <li onClick={toggleDrawer}><NavLink to="/appointment" className="btn btn-ghost text-primary">Appointment</NavLink></li>
             <li onClick={toggleDrawer}><NavLink to="/reviews" className="btn btn-ghost text-primary">Reviews</NavLink></li>

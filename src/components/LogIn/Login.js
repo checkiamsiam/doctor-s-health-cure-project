@@ -3,8 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 import auth from '../../firebase.init';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useSignInWithFacebook } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
+import Loading from '../Loading/Loading';
+
 
 const Login = () => {
   let navigate = useNavigate();
@@ -20,10 +24,46 @@ const Login = () => {
     loading3,
     error3,
   ] = useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending2, error] = useSendPasswordResetEmail(auth);
 
-  const handleLogin = async () => {
+
+  if (loading1 || loading2 || loading3 || sending2) {
+    return <Loading></Loading>
+  }
+
+  // if (user3) {
+  //   if (user3.emailVerified) {
+  //     navigate(from)
+
+
+  //   } else {
+  //     signOut(auth)
+  //     toast('Your Email is not verify. Verify to Login')
+
+  //   }
+  // }
+  
+  if (user1 || user2 || user3) {
+    navigate(from)
+  }
+
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
     await signInWithEmailAndPassword(email, password)
-    await navigate(from)
+
+
+
+
+  }
+
+  const handleResetPass = async () => {
+    if (email.length > 4) {
+      await sendPasswordResetEmail(email)
+      await toast('Password Reset-able email sent')
+    } else {
+      await toast('Enter Email First')
+    }
   }
 
   return (
@@ -40,7 +80,9 @@ const Login = () => {
             <label className="mr-4 font-bold inline-block mb-2 text-accent" htmlFor="password">Password:</label>
             <input onChange={(e) => setPassword(e.target.value)} type="password" className="border bg-gray-100 py-2 px-4 w-full outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="Password" />
           </div>
-          <span className="text-sm test-neutral inline-block  hover:text-indigo-600 hover:underline hover:cursor-pointer transition duration-200">forget password?</span>
+
+          <span onClick={handleResetPass} className="text-sm test-neutral inline-block  hover:text-indigo-600 hover:underline hover:cursor-pointer transition duration-200">Forget Password?</span>
+
           <button onClick={handleLogin} className="w-full mt-6  bg-indigo-600 py-3 rounded-md hover:bg-indigo-500 transition duration-300 btn btn-accent text-base-100 font-bold bg-gradient-to-r from-primary to-accent">LOGIN</button>
           <h1 className='text-center mt-3 text-neutral'>Don't have any account? <Link to="/signup" className='text-accent hover:underline  font-semibold'>Create New</Link></h1>
           <div className="divider">With Social</div>

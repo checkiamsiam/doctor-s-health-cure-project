@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 import auth from '../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useSignInWithFacebook } from 'react-firebase-hooks/auth';
+import { useSendEmailVerification } from 'react-firebase-hooks/auth';
+import Loading from '../Loading/Loading';
+import { signOut } from 'firebase/auth';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [agree, setAgree] = useState(false)
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('');
@@ -20,17 +25,29 @@ const SignUp = () => {
     error3,
   ] = useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, error4] = useUpdateProfile(auth);
+  const [sendEmailVerification, sending, error5] = useSendEmailVerification(auth);
 
   const handleAgreeTerms = () => {
     setAgree(!agree)
   }
 
-  const handleRegister = async () => {
+  if (loading1 || loading2 || loading3 || updating || sending) {
+    return <Loading></Loading>
+  }
+
+
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
     await createUserWithEmailAndPassword(email, password)
     await updateProfile({ displayName })
-    await alert('Updated profile');
-
+    await toast('Updated profile');
+    await sendEmailVerification();
+    await toast('Email Verification Sent')
+    await signOut(auth)
+    await navigate('/login')
   }
+
 
   return (
     <div className=" bg-gray-100 flex items-center py-20 bg-forBanner bg-center bg-cover">
