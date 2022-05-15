@@ -20,18 +20,18 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const [transparent, setTransparent] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0);
-  // const controlNavbar1 = () => {
-  //   if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+  const controlNavbar1 = () => {
+    if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
 
-  //     setShow(true);
-  //   } else { // if scroll up show the navbar
-  //     setShow(false);
-  //   }
+      setShow(true);
+    } else { // if scroll up show the navbar
+      setShow(false);
+    }
 
-  //   // remember current page location to use in the next move
-  //   setLastScrollY(window.scrollY);
+    // remember current page location to use in the next move
+    setLastScrollY(window.scrollY);
 
-  // };
+  };
 
 
   const controlNavbar2 = () => {
@@ -43,7 +43,7 @@ const Header = () => {
     }
   }
 
-  // window.addEventListener('scroll', controlNavbar1);
+  window.addEventListener('scroll', controlNavbar1);
   window.addEventListener('scroll', controlNavbar2);
 
 

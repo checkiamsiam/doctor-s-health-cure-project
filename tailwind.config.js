@@ -19,13 +19,9 @@ module.exports = {
           accent: "#37cdbe",
           neutral: "#36454F",
           "base-100": "#ffffff",
-        },
-        dark: {
-          ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
-    
-          "neutral": "#ffffff",
-        },
+        }
       },
+      "dark"
 
     ],
   },

@@ -1,7 +1,10 @@
+import { async } from '@firebase/util';
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import auth from '../../firebase.init';
+
 
 const AvailableAppointmentCard = ({ service, selectedDate, modalService, setModalService }) => {
   const { name, slots } = service;
@@ -12,7 +15,7 @@ const AvailableAppointmentCard = ({ service, selectedDate, modalService, setModa
       <p className={`uppercase text-sm ${slots.length > 0 || 'text-red-500'}`}>{slots.length > 0 ? `${slots?.length} spaces available` : 'Try Another Date'}</p>
 
       <label onClick={() => setModalService(service)} htmlFor="appointment-modal" className="btn modal-button uppercase mt-3  bg-gradient-to-r from-primary to-accent text-white" disabled={slots.length === 0}
-        >Book Appointment</label>
+      >Book Appointment</label>
 
       <AppointmentModal modalService={modalService} selectedDate={selectedDate}></AppointmentModal>
 
@@ -25,6 +28,22 @@ const AppointmentModal = ({ modalService, selectedDate }) => {
   const [user] = useAuthState(auth);
   const { name, slots } = modalService;
 
+  const handleAppointment = (e) => {
+    e.preventDefault();
+
+    const postItem = { treatmentName: name, date: format(selectedDate, 'PP'), time: e.target.slot.value, email: user.email, bookedBy: user?.displayName, phone: parseInt(e.target.phone.value) };
+
+    fetch('http://localhost:5000/booked', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(postItem)
+    })
+      .then(res => res.json())
+      .then(data => toast(data.message))
+
+  }
   return (
     <div>
       <input type="checkbox" id="appointment-modal" className="modal-toggle" />
@@ -32,14 +51,14 @@ const AppointmentModal = ({ modalService, selectedDate }) => {
         <div className="modal-box relative">
           <label htmlFor="appointment-modal" className="btn btn-accent btn-sm btn-circle absolute right-3 top-3">✕</label>
           <h3 className="font-bold text-lg text-left text-primary mb-7">{name}</h3>
-          <form className=' form-control'>
+          <form onSubmit={handleAppointment} className=' form-control'>
             <input type="text" placeholder="Date" value={format(selectedDate, 'PP')} className="input w-full mb-3 bg-[#E6E6E6]" readOnly />
-            <select className="select input w-full mb-3 bg-[#E6E6E6]">
-              {slots?.length > 0 && slots.map(slot => <option key={slot}>{slot}</option>)}
+            <select name="slot" className="select input w-full mb-3 bg-[#E6E6E6]">
+              {slots?.length > 0 && slots.map((slot, index) => <option value={slot} key={index}>{slot}</option>)}
             </select>
-            <input type="text" value={user?.displayName} placeholder="Name" className="input  w-full mb-3 bg-[#E6E6E6]"  readOnly/>
-            <input type="text" value={user?.email} placeholder="Email Adress" className="input w-full mb-3 bg-[#E6E6E6]" readOnly/>
-            <input type="text" placeholder="Phone Number" className="input  w-full mb-3 bg-[#E6E6E6]" />
+            <input type="text" value={user?.displayName} placeholder="Name" className="input  w-full mb-3 bg-[#E6E6E6]" readOnly />
+            <input type="text" value={user?.email} placeholder="Email Adress" className="input w-full mb-3 bg-[#E6E6E6]" readOnly />
+            <input type="text" name='phone' placeholder="Phone Number" className="input  w-full mb-3 bg-[#E6E6E6]" />
             <input type="submit" value="BOOk" className='btn btn-accent text-base-100 font-bold bg-gradient-to-r from-primary to-accent' />
           </form>
 
