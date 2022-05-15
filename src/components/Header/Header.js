@@ -18,37 +18,41 @@ const Header = () => {
 
 
   const [show, setShow] = useState(false);
+  const [transparent, setTransparent] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0);
-  const controlNavbar = () => {
-    if (typeof window !== 'undefined') {
-      if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+  // const controlNavbar1 = () => {
+  //   if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
 
-        setShow(true);
-      } else { // if scroll up show the navbar
-        setShow(false);
-      }
+  //     setShow(true);
+  //   } else { // if scroll up show the navbar
+  //     setShow(false);
+  //   }
 
-      // remember current page location to use in the next move
-      setLastScrollY(window.scrollY);
+  //   // remember current page location to use in the next move
+  //   setLastScrollY(window.scrollY);
+
+  // };
+
+
+  const controlNavbar2 = () => {
+    if (window.scrollY >= 250) {
+
+      setTransparent(false);
+    } else {
+      setTransparent(true);
     }
-  };
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
+  }
 
-      // cleanup function
-      return () => {
-        window.removeEventListener('scroll', controlNavbar);
-      };
-    }
-  }, [lastScrollY]);
+  // window.addEventListener('scroll', controlNavbar1);
+  window.addEventListener('scroll', controlNavbar2);
 
 
 
 
-  console.log(user);
+
+
   return (
-    <div className={`fixed top-0 w-full z-30 bg-[rgba(255,255,255,0.53)] showNav ${show && 'hideNav'}`}>
+    <div className={`fixed top-0 w-full z-30 showNav ${show && 'hideNav'} ${transparent ? 'bg-transparent' : 'bg-[#e0dede]'}`}>
       <div className="navbar container mx-auto">
         <div className="flex-none">
           <button onClick={toggleDrawer} className="btn btn-square btn-ghost lg:block hidden">
