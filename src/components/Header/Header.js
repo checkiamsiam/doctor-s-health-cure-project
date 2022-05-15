@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { GrClose } from 'react-icons/gr';
@@ -15,9 +15,40 @@ const Header = () => {
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
   }
+
+
+  const [show, setShow] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const controlNavbar = () => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+
+        setShow(true);
+      } else { // if scroll up show the navbar
+        setShow(false);
+      }
+
+      // remember current page location to use in the next move
+      setLastScrollY(window.scrollY);
+    }
+  };
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
+
+
+
+
   console.log(user);
   return (
-    <div className='fixed top-0 w-full z-30 bg-[rgba(255,255,255,0.53)]'>
+    <div className={`fixed top-0 w-full z-30 bg-[rgba(255,255,255,0.53)] showNav ${show && 'hideNav'}`}>
       <div className="navbar container mx-auto">
         <div className="flex-none">
           <button onClick={toggleDrawer} className="btn btn-square btn-ghost lg:block hidden">
