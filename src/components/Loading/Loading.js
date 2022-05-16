@@ -5,8 +5,8 @@ import './Loading.css'
 const Loading = () => {
   return (
 
-    <div>
-      <div className="wrapper">
+    <div className='h-screen  flex justify-center items-center'>
+      {/* <div className="wrapper">
 
         <div id="loader-wrapper">
 
@@ -20,7 +20,8 @@ const Loading = () => {
           <div className="loader-section section-right"></div>
 
         </div>
-      </div>
+      </div> */}
+      <button className="  btn loading"></button>
     </div>
 
   );

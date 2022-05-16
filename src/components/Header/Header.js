@@ -78,6 +78,7 @@ const Header = () => {
             <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li className='text-center text-primary '>{user?.displayName}</li>
               <li className='text-center mb-2 text-primary'>{user?.email}</li>
+              <li className='text-accent'><Link to="/dashboard">Dashboard</Link></li>
               <li className='text-accent'><Link to="user_settings">Settings</Link></li>
               <li onClick={() => signOut(auth)} className='text-accent'><button>Logout</button></li>
             </ul>

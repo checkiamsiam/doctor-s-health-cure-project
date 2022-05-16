@@ -77,7 +77,7 @@ const SignUp = () => {
           <div className="divider">With Social</div>
           <div className="flex flex-col w-full lg:flex-row">
             <div className="grid flex-grow lg:h-24 card rounded-box place-items-center">
-              <button onClick={() => signInWithFacebook()} className="btn  btn-ghost border-black border-2 lg:w-fit w-full gap-2 text-neutral  lg:px-6">
+              <button onClick={() => signInWithGoogle()} className="btn  btn-ghost border-black border-2 lg:w-fit w-full gap-2 text-neutral  lg:px-6">
                 <FcGoogle />
                 Google
               </button>

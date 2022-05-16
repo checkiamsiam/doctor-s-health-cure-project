@@ -7,6 +7,8 @@ import AppointmentPage from '../AppointmentPage/AppointmentPage';
 import Login from '../LogIn/Login';
 import SignUp from '../SignUP/SignUp';
 import Testimonial from '../Testimonial/Testimonial';
+import Dashboard from '../Dashboard/Dashboard';
+
 
 const publicRoutes = [
   {no:1 , path: '/' , name:Home} ,
@@ -18,6 +20,7 @@ const publicRoutes = [
 ]
 const authRoutes = [
   {no:1 , path: '/appointment' , name:AppointmentPage} ,
+  {no:2 , path: '/dashboard' , name:Dashboard} ,
   
 ]
 

@@ -7,15 +7,21 @@ import reportWebVitals from './reportWebVitals';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import GoTop from './components/RouteChangeFromTop/RouteChangeFromTop';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
+
+
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <GoTop/>
-      <App />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <GoTop />
+        <App />
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

@@ -1,4 +1,4 @@
-import { async } from '@firebase/util';
+
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import auth from '../../firebase.init';
 
 
-const AvailableAppointmentCard = ({ service, selectedDate, modalService, setModalService }) => {
+const AvailableAppointmentCard = ({ service, selectedDate, modalService, setModalService, refetch }) => {
   const { name, slots } = service;
   return (
     <div className=" text-center text-neutral rounded-md md:p-12 p-6 shadow-lg w-full my-6 " >
@@ -17,14 +17,14 @@ const AvailableAppointmentCard = ({ service, selectedDate, modalService, setModa
       <label onClick={() => setModalService(service)} htmlFor="appointment-modal" className="btn modal-button uppercase mt-3  bg-gradient-to-r from-primary to-accent text-white" disabled={slots.length === 0}
       >Book Appointment</label>
 
-      <AppointmentModal modalService={modalService} selectedDate={selectedDate}></AppointmentModal>
+      <AppointmentModal modalService={modalService} refetch={refetch} selectedDate={selectedDate}></AppointmentModal>
 
     </div>
   );
 };
 
 
-const AppointmentModal = ({ modalService, selectedDate }) => {
+const AppointmentModal = ({ modalService, selectedDate, refetch }) => {
   const [user] = useAuthState(auth);
   const { name, slots } = modalService;
 
@@ -41,9 +41,17 @@ const AppointmentModal = ({ modalService, selectedDate }) => {
       body: JSON.stringify(postItem)
     })
       .then(res => res.json())
-      .then(data => toast(data.message))
+      .then(data => {
+        toast(data.message)
+        refetch()
+      })
 
   }
+
+
+
+
+
   return (
     <div>
       <input type="checkbox" id="appointment-modal" className="modal-toggle" />
