@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { GrClose } from 'react-icons/gr';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink , useNavigate } from 'react-router-dom';
 import './Header.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 
 const Header = () => {
+  const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const firstLetter = user?.displayName?.slice(0, 1);
   const [isOpen, setIsOpen] = useState(false)
@@ -47,7 +48,10 @@ const Header = () => {
   window.addEventListener('scroll', controlNavbar2);
 
 
-
+const hadleLogout = async () => {
+  await signOut(auth)
+  await navigate('/')
+}
 
 
 
@@ -80,7 +84,7 @@ const Header = () => {
               <li className='text-center mb-2 text-primary'>{user?.email}</li>
               <li className='text-accent'><Link to="/dashboard">Dashboard</Link></li>
               <li className='text-accent'><Link to="user_settings">Settings</Link></li>
-              <li onClick={() => signOut(auth)} className='text-accent'><button>Logout</button></li>
+              <li onClick={hadleLogout} className='text-accent'><button>Logout</button></li>
             </ul>
           </div>
             :

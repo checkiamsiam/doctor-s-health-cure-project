@@ -20,7 +20,6 @@ const publicRoutes = [
 ]
 const authRoutes = [
   {no:1 , path: '/appointment' , name:AppointmentPage} ,
-  {no:2 , path: '/dashboard' , name:Dashboard} ,
   
 ]
 
