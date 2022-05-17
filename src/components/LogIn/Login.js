@@ -30,13 +30,14 @@ const Login = () => {
   const [sendPasswordResetEmail, sending2, error] = useSendPasswordResetEmail(auth);
 
   const [token] = useAddUser(user1 || user2 || user3)
+
   useEffect(() => {
 
-    if (user1 || user2 || user3) {
+    if (token) {
       navigate(from, { replace: true });
     }
 
-  }, [user1, user2, user3])
+  }, [token])
 
 
   if (loading1 || loading2 || loading3 || sending2) {

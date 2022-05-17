@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
@@ -31,6 +31,15 @@ const SignUp = () => {
   const [sendEmailVerification, sending, error5] = useSendEmailVerification(auth);
   const [token] = useAddUser(user1 || user2 || user3)
 
+
+  useEffect(() => {
+
+    if (token) {
+      navigate(from, { replace: true });
+    }
+
+  }, [token])
+
   const handleAgreeTerms = () => {
     setAgree(!agree)
   }
@@ -49,6 +58,7 @@ const SignUp = () => {
     await sendEmailVerification();
     await toast('Email Verification Sent')
     await signOut(auth)
+    await localStorage.removeItem('accessToken')
     await navigate('/login')
   }
 

@@ -15,7 +15,10 @@ const useAddUser = user => {
         },
       })
         .then(res => res.json())
-        .then(data => { })
+        .then(data => {
+          localStorage.setItem('accessToken' , data.accessToken)
+          setToken(data.accessToken)
+        })
     }
   }, [user])
   return [token]

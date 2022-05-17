@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react';
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { GrClose } from 'react-icons/gr';
-import { Link, NavLink , useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
+import Loading from '../Loading/Loading';
 
 const Header = () => {
   const navigate = useNavigate();
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const firstLetter = user?.displayName?.slice(0, 1);
   const [isOpen, setIsOpen] = useState(false)
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
   }
+
+
+
 
 
   const [show, setShow] = useState(false);
@@ -48,11 +52,15 @@ const Header = () => {
   window.addEventListener('scroll', controlNavbar2);
 
 
-const hadleLogout = async () => {
-  await signOut(auth)
-  await navigate('/')
-}
+  const hadleLogout = async () => {
+    await signOut(auth)
+    await localStorage.removeItem('accessToken')
+    await navigate('/')
+  }
 
+  if (loading) {
+    return <Loading></Loading>
+  }
 
 
   return (

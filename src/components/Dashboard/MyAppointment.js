@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../src/firebase.init'
@@ -8,11 +8,31 @@ import Loading from '../Loading/Loading';
 const MyAppointment = () => {
   const { pathname } = useLocation();
   const [user] = useAuthState(auth)
-  const { isLoading, data } = useQuery(['myappointment', pathname], () => fetch(`http://localhost:5000/booked?email=${user.email}`).then(res => res.json()))
+  const [data, setData] = useState([])
 
-  if (isLoading) {
-    return <Loading></Loading>
-  }
+  useEffect(() => {
+    try {
+      if (user) {
+        fetch(`http://localhost:5000/booked?email=${user.email}`, {
+          method: 'GET',
+          headers: {
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          },
+        })
+          .then(res => {
+            res.json()
+            if(res.status === 403){
+              return 
+            }
+          })
+          .then(data => setData(data))
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [pathname, user])
+
+
 
   return (
     <div className=' mt-5'>
@@ -31,9 +51,9 @@ const MyAppointment = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {data.map((a , index) => <tr key={index} className="text-gray-700">
+                {data?.map((a, index) => <tr key={index} className="text-gray-700">
                   <td className="text-center py-3 border">
-                    {index +1}
+                    {index + 1}
                   </td>
                   <td className="text-center py-3 text-xs border">
                     <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> {a.treatmentName} </span>
