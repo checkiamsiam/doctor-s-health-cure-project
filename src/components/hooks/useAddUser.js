@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react"
 
 
 const useAddUser = user => {
-  let navigate = useNavigate();
-  let location = useLocation();
-  let from = location.state?.from?.pathname || "/";
   const [token, setToken] = useState('');
-  if (user) {
-    navigate(from)
-  }
-
+  
   useEffect(() => {
     if (user?.user?.email) {
 
