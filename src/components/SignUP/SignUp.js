@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 import toast from 'react-hot-toast';
@@ -9,9 +9,12 @@ import { useSignInWithFacebook } from 'react-firebase-hooks/auth';
 import { useSendEmailVerification } from 'react-firebase-hooks/auth';
 import Loading from '../Loading/Loading';
 import { signOut } from 'firebase/auth';
+import useAddUser from '../hooks/useAddUser';
 
 const SignUp = () => {
-  const navigate = useNavigate();
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const [agree, setAgree] = useState(false)
   const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('');
@@ -26,6 +29,7 @@ const SignUp = () => {
   ] = useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, error4] = useUpdateProfile(auth);
   const [sendEmailVerification, sending, error5] = useSendEmailVerification(auth);
+  const [token] = useAddUser(user1 || user2 || user3)
 
   const handleAgreeTerms = () => {
     setAgree(!agree)
@@ -77,14 +81,20 @@ const SignUp = () => {
           <div className="divider">With Social</div>
           <div className="flex flex-col w-full lg:flex-row">
             <div className="grid flex-grow lg:h-24 card rounded-box place-items-center">
-              <button onClick={() => signInWithGoogle()} className="btn  btn-ghost border-black border-2 lg:w-fit w-full gap-2 text-neutral  lg:px-6">
+              <button onClick={async () => {
+                await signInWithGoogle()
+                await navigate(from)
+              }} className="btn  btn-ghost border-black border-2 lg:w-fit w-full gap-2 text-neutral  lg:px-6">
                 <FcGoogle />
                 Google
               </button>
             </div>
             <div className="divider lg:divider-horizontal">OR</div>
             <div className="grid flex-grow  card lg:h-24 rounded-box place-items-center">
-              <button onClick={() => signInWithFacebook()} className="btn  lg:w-fit w-full btn-secondary gap-2 text-base-100 ">
+              <button onClick={async () => {
+                await signInWithFacebook()
+                await navigate(from)
+              }} className="btn  lg:w-fit w-full btn-secondary gap-2 text-base-100 ">
                 <FaFacebookF />
                 Facebook
               </button>

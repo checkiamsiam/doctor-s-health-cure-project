@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
@@ -8,12 +8,13 @@ import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWith
 import { useSignInWithFacebook } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
 import Loading from '../Loading/Loading';
+import useAddUser from '../hooks/useAddUser';
 
 
 const Login = () => {
-  let navigate = useNavigate();
-  let location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+
+
+ 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInWithGoogle, user1, loading1, error1] = useSignInWithGoogle(auth);
@@ -25,26 +26,22 @@ const Login = () => {
     error3,
   ] = useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending2, error] = useSendPasswordResetEmail(auth);
+  
+
+  const [token] = useAddUser(user1 || user2 || user3)
 
 
   if (loading1 || loading2 || loading3 || sending2) {
     return <Loading></Loading>
   }
 
-  
 
-  if (user1 || user2 || user3) {
-    navigate(from)
-  }
 
 
   const handleLogin = async (e) => {
     e.preventDefault();
     await signInWithEmailAndPassword(email, password)
-
-
-
-
+   
   }
 
   const handleResetPass = async () => {
