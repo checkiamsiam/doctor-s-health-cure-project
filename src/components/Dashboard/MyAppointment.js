@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../src/firebase.init'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { signOut } from 'firebase/auth';
 import Loading from '../Loading/Loading';
+
 
 const MyAppointment = () => {
   const { pathname } = useLocation();
   const [user] = useAuthState(auth)
   const [data, setData] = useState([])
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     try {
@@ -20,25 +25,33 @@ const MyAppointment = () => {
           },
         })
           .then(res => {
-            res.json()
-            if(res.status === 403){
-              return 
+            if (res.status === 403) {
+              signOut(auth)
+              localStorage.removeItem('accessToken')
+              navigate('/')
+              return
             }
+            return res.json()
           })
-          .then(data => setData(data))
+          .then(data => {
+            setData(data)
+            setLoading(false)
+          })
       }
     } catch (err) {
       console.log(err);
     }
   }, [pathname, user])
 
-
+  if (loading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div className=' mt-5'>
       <h1 className='text-center text-accent italic'>My Appointments</h1>
 
-      <section className="container mx-auto p-6 font-mono">
+      {data ? <section className="container mx-auto p-6 font-mono">
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             <table className="w-full">
@@ -64,9 +77,13 @@ const MyAppointment = () => {
 
               </tbody>
             </table>
+
+
           </div>
         </div>
-      </section>
+      </section> :
+        <h1 className='text-red-400 text-center mt-5 lg:text-4xl text-3xl'>You don't have any appointment</h1>
+      }
     </div>
   );
 };

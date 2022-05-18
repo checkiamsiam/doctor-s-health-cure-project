@@ -11,6 +11,7 @@ const Dashboard = () => {
           {/* <!-- Sidebar content here --> */}
           <li className='font-semibold text-accent'><Link to='/dashboard'>My Appointment</Link></li>
           <li className='font-semibold text-accent'><Link to='/dashboard/myreview'>My Reviews</Link></li>
+          <li className='font-semibold text-accent'><Link to='/dashboard/users'>All Users</Link></li>
         </ul>
       </div>
       <div className='w-full'>
@@ -18,6 +19,7 @@ const Dashboard = () => {
         <div className="text-center lg:hidden block px-5">
           <Link to='/dashboard' className="tab tab-bordered ">My Appointment</Link>
           <Link to='/dashboard/myreview' className="tab tab-bordered ml-2">My Reviews</Link>
+          <Link to='/dashboard/users' className="tab tab-bordered ml-2">All Users</Link>
         </div>
         <Outlet />
       </div>

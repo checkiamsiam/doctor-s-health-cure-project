@@ -8,6 +8,7 @@ const Loading = () => {
     <div className='h-screen  flex justify-center items-center'>
       {/* <div className="wrapper">
 
+
         <div id="loader-wrapper">
 
           <div id="loader">

@@ -29,6 +29,7 @@ const SignUp = () => {
   ] = useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, error4] = useUpdateProfile(auth);
   const [sendEmailVerification, sending, error5] = useSendEmailVerification(auth);
+  
   const [token] = useAddUser(user1 || user2 || user3)
 
 
@@ -91,20 +92,14 @@ const SignUp = () => {
           <div className="divider">With Social</div>
           <div className="flex flex-col w-full lg:flex-row">
             <div className="grid flex-grow lg:h-24 card rounded-box place-items-center">
-              <button onClick={async () => {
-                await signInWithGoogle()
-                await navigate(from)
-              }} className="btn  btn-ghost border-black border-2 lg:w-fit w-full gap-2 text-neutral  lg:px-6">
+              <button onClick={ () =>signInWithGoogle()} className="btn  btn-ghost border-black border-2 lg:w-fit w-full gap-2 text-neutral  lg:px-6">
                 <FcGoogle />
                 Google
               </button>
             </div>
             <div className="divider lg:divider-horizontal">OR</div>
             <div className="grid flex-grow  card lg:h-24 rounded-box place-items-center">
-              <button onClick={async () => {
-                await signInWithFacebook()
-                await navigate(from)
-              }} className="btn  lg:w-fit w-full btn-secondary gap-2 text-base-100 ">
+              <button onClick={ () => signInWithFacebook()} className="btn  lg:w-fit w-full btn-secondary gap-2 text-base-100 ">
                 <FaFacebookF />
                 Facebook
               </button>

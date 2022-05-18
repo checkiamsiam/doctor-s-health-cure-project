@@ -98,7 +98,7 @@ const Header = () => {
             :
 
             <div className="md:ml-5">
-              <Link to="/login" className="btn btn-accent text-base-100 font-bold bg-gradient-to-r from-primary to-accent">Log in</Link>
+              <Link to="/login" className="btn btn-accent btn-sm  text-base-100 font-bold bg-gradient-to-r from-primary to-accent">Log in</Link>
             </div>}
 
 
