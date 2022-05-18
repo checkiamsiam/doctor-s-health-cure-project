@@ -78,7 +78,7 @@ const Header = () => {
           {user ? <div className="dropdown dropdown-end ">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
               {user?.photoURL ? <div className="w-9 rounded-full">
-                <img src={user.photoURL} alt='' />
+                <img src={user?.photoURL} alt='' />
               </div>
                 :
                 <div className="avatar placeholder">

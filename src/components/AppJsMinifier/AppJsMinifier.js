@@ -13,6 +13,7 @@ import RequireAuth from '../RequireAuth/RequireAuth';
 import MyAppointment from '../Dashboard/MyAppointment';
 import MyReview from '../Dashboard/MyReview';
 import Users from '../Dashboard/Users';
+import RequireAdmin from '../RequireAuth/RequireAdmin';
 
 
 const publicRoutes = [
@@ -42,7 +43,7 @@ const NestedDashboard =
   <Route path='/dashboard' element={<RequireAuth> <Dashboard /> </RequireAuth>}>
     <Route index element={<MyAppointment />} />
     <Route path='myreview' element={<MyReview />} />
-    <Route path='users' element={<Users />} />
+    <Route path='users' element={<RequireAdmin><Users /></RequireAdmin>} />
   </Route>
   ;
 

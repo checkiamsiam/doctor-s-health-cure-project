@@ -4,38 +4,42 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useAllUser from '../hooks/UseAllUser';
 import Loading from '../Loading/Loading';
 
 const Users = () => {
-  const navigate = useNavigate();
+
 
   const [user, loading] = useAuthState(auth);
 
-  const { isLoading, data: allUser, refetch } = useQuery(['allusers', user], () => fetch('http://localhost:5000/users', {
-    method: 'GET',
-    headers: {
-      'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-    }
-  }).then(res => {
-    if (res.status === 403) {
-      signOut(auth)
-      localStorage.removeItem('accessToken')
-      navigate('/')
-      return
-    }
-    return res.json()
-  }))
+  const { isLoading, allUser, refetch } = useAllUser(user);
 
+
+  const makeAdmin = (email) => {
+
+    fetch(`http://localhost:5000/users/${email}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+      },
+      body: JSON.stringify({ email })
+    })
+      .then(res => res.json())
+      .then(data => refetch())
+  }
 
 
   if (loading || isLoading) {
     return <Loading></Loading>
   }
 
+  const currentUser = allUser.find(u => u?.email === user?.email)
+
 
   return (
     <div className=' mt-5'>
-      <h1 className='text-center text-accent italic'>My Review</h1>
+      <h1 className='text-center text-accent italic'>Admin Panel</h1>
       <section className="container mx-auto p-6 font-mono">
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
@@ -45,19 +49,19 @@ const Users = () => {
                   <th className="text-center  py-3">Serial</th>
                   <th className="text-center  py-3">User</th>
                   <th className="text-center  py-3">Current State</th>
-                  <th className="text-center  py-3">Authorization</th>
+                  <th className="text-center  py-3">Authorize</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {allUser?.map((u , index) => <tr key={index} className="text-gray-700">
+                {allUser?.map((u, index) => <tr key={index} className="text-gray-700">
                   <td className="text-center py-3 border">
                     {index + 1} {u.email === user.email && '(YOU)'}
                   </td>
                   <td className="text-center py-3 text-xs border">
                     <span className="px-2 py-1 font-semibold leading-tight rounded-md text-white bg-neutral "> {u.email} </span>
                   </td>
-                  <td className="text-center py-3 text-ms font-semibold border"><span class="badge">{u.role}</span></td>
-                  <td className="text-center py-3 text-sm border"><button class="btn btn-xs">Make Admin</button></td>
+                  <td className="text-center py-3 text-ms font-semibold border"><span className="badge">{u.role}</span></td>
+                  <td className="text-center py-3 text-sm border">{u.email !== user.email ? (u?.role === 'admin' ? <span className="badge bg-green-700"></span> : (currentUser.role === 'admin' ? <button onClick={() => makeAdmin(u.email)} className="btn btn-xs">Make Admin</button> : <span className="badge bg-red-700"></span>)) : <span className="badge bg-red-700"></span>}</td>
                 </tr>)}
 
               </tbody>
