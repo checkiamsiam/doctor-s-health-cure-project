@@ -21,7 +21,6 @@ const Header = () => {
 
 
 
-
   const [show, setShow] = useState(false);
   const [transparent, setTransparent] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0);
