@@ -21,8 +21,8 @@ const Header = () => {
 
 
 
-  const [show, setShow] = useState(false);
   const [transparent, setTransparent] = useState(true)
+  const [show, setShow] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const controlNavbar1 = () => {
     if (window.scrollY > lastScrollY) { // if scroll down hide the navbar

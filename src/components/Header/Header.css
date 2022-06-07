@@ -3,8 +3,7 @@
 }
 .showNav{
   width: 100%;
-  position: fixed;
-  top: 0px;
+ 
   transition: 0.3s linear;
 
 }
